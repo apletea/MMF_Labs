@@ -1,5 +1,6 @@
 package lab7;
 
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -7,7 +8,9 @@ import java.util.Scanner;
  */
 public class C {
 
-    public static boolean isSatisfiedMask(String fileName, String mask){
+
+    static String mask;
+    public static boolean isSatisfiedMask(String fileName){
         for (int i = 0, j = 0 ; i < mask.length() && j <fileName.length() ;++i, ++j){
             char sym = mask.charAt(i);
             if (sym == '?')
@@ -27,11 +30,12 @@ public class C {
 
     public static void main(String [] args){
         Scanner sc = new Scanner(System.in);
-        String fileName = sc.nextLine();
-        String mask =sc.nextLine();
-        for (int i = 0, j = 0 ; i < mask.length() && j <fileName.length() ;++i, ++j){
-          
+        File folder = new File("./src");
+        File [] lissOfFiles = folder.listFiles();
+        mask =sc.nextLine();
+        for (int i = 0 ; i < lissOfFiles.length; ++i){
+            String ans = isSatisfiedMask(lissOfFiles[i].getName()) ? " not satisfied" : " satisfied ";
+            System.out.println(lissOfFiles[i].getName() + ans);
         }
-        System.out.println("Yes");
     }
 }
