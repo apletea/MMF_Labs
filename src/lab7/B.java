@@ -25,3 +25,141 @@ public class B {
          }
     }
 }
+
+class Строка{
+ String str;
+
+    public Строка(String str) {
+        this.str = str;
+    }
+
+    public String getStr() {
+        return str;
+    }
+
+    public void setStr(String str) {
+        this.str = str;
+    }
+
+    @Override
+    public String toString() {
+        return "Строка{" +
+                "str='" + str + '\'' +
+                '}';
+    }
+}
+
+class Предложение{
+ String str;
+
+    public String getStr() {
+        return str;
+    }
+
+    public void setStr(String str) {
+        this.str = str;
+    }
+
+    public Предложение(String str) {
+        this.str = str;
+    }
+
+    @Override
+    public String toString() {
+        return "Предложение{" +
+                "str='" + str + '\'' +
+                '}';
+    }
+}
+
+class Символ{
+  char symbol;
+
+    public char getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(char symbol) {
+        this.symbol = symbol;
+    }
+
+    public Символ(char symbol) {
+        this.symbol = symbol;
+    }
+
+    @Override
+    public String toString() {
+        return "Символ{" +
+                "symbol=" + symbol +
+                '}';
+    }
+}
+
+class Абзац{
+  String str;
+
+    public Абзац(String str) {
+        this.str = str;
+    }
+
+    public String getStr() {
+        return str;
+    }
+
+    public void setStr(String str) {
+        this.str = str;
+    }
+
+    @Override
+    public String toString() {
+        return "Абзац{" +
+                "str='" + str + '\'' +
+                '}';
+    }
+}
+
+class Лексема {
+    String str;
+
+    public String getStr() {
+        return str;
+    }
+
+    public void setStr(String str) {
+        this.str = str;
+    }
+
+    @Override
+    public String toString() {
+        return "Лексема{" +
+                "str='" + str + '\'' +
+                '}';
+    }
+
+    public Лексема(String str) {
+        this.str = str;
+    }
+}
+
+class Листинг {
+    String str;
+
+    public String getStr() {
+        return str;
+    }
+
+    public void setStr(String str) {
+        this.str = str;
+    }
+
+    @Override
+    public String toString() {
+        return "Листинг{" +
+                "str='" + str + '\'' +
+                '}';
+    }
+
+    public Листинг(String str) {
+        this.str = str;
+    }
+}
