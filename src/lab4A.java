@@ -8,21 +8,27 @@ public class lab4A {
 
 
     public static void main(String [] args){
-        List<planet> planets = new ArrayList<>();
-        for (int i = 0 ; i < 5; ++i){
-            planets.add(new planet(" "+i));
+        try {
+
+            List<planet> planets = new ArrayList<>();
+            for (int i = 0; i < 5; ++i) {
+                planets.add(new planet(" " + i));
+            }
+            List<moon> moons = new ArrayList<>();
+            for (int i = 0; i < 5; ++i) {
+                moons.add(new moon(" " + i));
+            }
+            star sr = new star("Sun");
+            starSystem ss = new starSystem(planets, sr, moons);
+            System.out.println(ss);
+            System.out.println("кол-во планет в системе " + ss.planets.size());
+            System.out.println("название звезды " + ss.sr);
+            ss.addNewStartObject(new planet("planet"));
+            System.out.println(ss);
         }
-        List<moon> moons = new ArrayList<>();
-        for (int i =0 ; i < 5; ++i){
-            moons.add(new moon(" " + i));
+        catch (Exception e){
+            System.out.println("something went wrong");
         }
-        star sr = new star("Sun");
-        starSystem ss = new starSystem(planets, sr, moons);
-        System.out.println(ss);
-        System.out.println("кол-во планет в системе "+ss.planets.size());
-        System.out.println("название звезды " + ss.sr);
-        ss.addNewStartObject(new planet("planet"));
-        System.out.println(ss);
     }
 
 }

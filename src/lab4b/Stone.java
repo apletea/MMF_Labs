@@ -39,7 +39,7 @@ public class Stone {
     @Override
     public int hashCode() {
         int result = weight;
-        result = 31 * result + transparency;
+        result = 31 * result + transparency + 'a';
         return result;
     }
 

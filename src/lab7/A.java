@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class A {
     public static void main(String ... args){
         Scanner sc = new Scanner(System.in);
-        String str = sc.next();
+        String str = sc.nextLine();
         int delOrInsert = sc.nextInt();
         char symbol = sc.next().charAt(0);
         char replaceAfter = sc.next().charAt(0);
