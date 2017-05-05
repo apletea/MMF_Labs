@@ -1,12 +1,16 @@
 package lab10;
 
+import java.util.Scanner;
+
 /**
  * Created by apletea on 3.5.17.
  */
 public class B {
     public static void main(String []rgs){
         autoStop autoStop = new autoStop();
-        for (int i = 1 ; i < 160; ++i){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        for (int i = 1 ; i < n; ++i){
             autoStop.newCar(i);
             if (i%3==0)
                 autoStop.outCar((i+10)%6 + i%3);

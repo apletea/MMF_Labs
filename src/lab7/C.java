@@ -13,6 +13,8 @@ public class C {
     public static boolean isSatisfiedMask(String fileName){
         for (int i = 0, j = 0 ; i < mask.length() && j <fileName.length() ;++i, ++j){
             char sym = mask.charAt(i);
+            if (mask.length() > fileName.length())
+                return false;
             if (sym == '?')
                 continue;
             if (sym == '*'){
@@ -34,7 +36,7 @@ public class C {
         File [] lissOfFiles = folder.listFiles();
         mask =sc.nextLine();
         for (int i = 0 ; i < lissOfFiles.length; ++i){
-            String ans = isSatisfiedMask(lissOfFiles[i].getName()) ? " not satisfied" : " satisfied ";
+            String ans = isSatisfiedMask(lissOfFiles[i].getName()) ? " satisfied" : " not satisfied ";
             System.out.println(lissOfFiles[i].getName() + ans);
         }
     }
