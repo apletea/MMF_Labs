@@ -35,7 +35,7 @@ public class A {
             }
         }
         for (int i = 0; i < count.length; ++i){
-            System.out.println(words_list.get(i));
+            System.out.println(words_list.get(i) + "  " + count[i]);
         }
     }
 
@@ -43,8 +43,8 @@ public class A {
         words_list.add("бой");
         words_list.add("вишня");
         words_list.add("море");
-        words_list.add("поводок");
         words_list.add("дух");
+        words_list.add("поводок");
 
     }
 }
