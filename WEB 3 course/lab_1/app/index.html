@@ -1,0 +1,31 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<link href="css/main.css" rel="stylesheet">
+<script src="libs/jquery/dist/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="libs/handlebars/handlebars.runtime.min.js"></script>
+<script type="text/javascript" src="libs/handlebars/handlebars.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+
+</head>
+<body>
+<div class="results">
+   <script id="template" type="text/x-handlebars-template">
+      {{#each results}}
+      <div id="" class="card">
+      <div class="details">
+        <div id="user_photo" class="user_photo horizontal_center">
+          <img src="{{picture.thumbnail}}">
+        </div>
+      </div>
+      <ul id="values_list" class="">
+          <li class=""  data-value="" data-label="name">Hi, my name is {{name.first}}</li>
+      </ul>
+  </div>
+    {{/each}}
+  </div>  
+</body>
+</html>
+

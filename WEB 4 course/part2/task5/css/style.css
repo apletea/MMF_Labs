@@ -1,0 +1,20 @@
+.wrapper{
+	position: relative;
+}
+.text-center{
+	padding: 15px 25px;
+	display: block;
+	margin: 50px auto;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	border-radius: 5px;
+}
+.input-group{
+	margin: 10px auto;
+	max-width: 315px;
+}
+.input-group-addon{
+	width: 36px;
+}
+.btn-ban{
+	width: 74px;
+}

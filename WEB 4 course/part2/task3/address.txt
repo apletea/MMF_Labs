@@ -1,0 +1,10 @@
+http://localhost/web/task3/second.php
+http://localhost/web/task3/third.php
+http://localhost/web/task3/fourth.php
+http://localhost/web/task3/fourth.php
+http://google.com
+http://localhost/web/task3/second.php
+http://localhost/web/task3/second.php
+http://localhost/web/task3/second.php
+http://localhost/web/task3/fourth.php
+http://localhost/web/task3/fourth.php

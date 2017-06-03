@@ -1,0 +1,17 @@
+{
+  "name": "laba_1",
+  "version": "1.0.0",
+  "description": "try to fix bugs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dzmitry Kamarouski",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.16.0",
+    "gulp": "^3.9.1",
+    "jquery": "^3.1.1",
+    "handlebars": "^4.0.5"
+  }
+}

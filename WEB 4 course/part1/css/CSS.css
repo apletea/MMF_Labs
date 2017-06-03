@@ -1,0 +1,115 @@
+body{
+	margin: 0px auto;
+	background: url('../img/1.png');
+	/*background: #000;*/
+	background-size: 100%;
+}
+/*nav*/
+nav{
+	margin-top: 10px;
+	width: 100%;
+	height: 55px;
+	background: #fff;
+}
+nav ul{
+	list-style:none;
+}
+nav li{
+	margin-top: 2.5px;
+	height: 50px;
+	float:left;
+	border-left: 1px  solid #cccccc;
+	padding: 0px 27px 0px 27px ;
+}
+ nav li.vypod{
+	width: 60px;
+}
+nav li.Home{
+	margin-left: 5%;
+	border: 0px  solid;
+}
+nav li a{
+	font-size: 13px;
+	font-family: Verdana, Geneva, sans-serif;
+	line-height: 50px;
+	text-decoration: none;
+	color: #000;
+	font-weight: 600;
+}
+nav li:hover {
+	display: block;
+	background: #000;
+}
+nav li:hover a {
+	color: #fff;
+}
+nav ul li ul,nav ul li:hover ul ul {
+	display: none;
+	background:#000;
+	position: relative;
+	top: -6px;
+	left: -27px;
+	padding: 0px 20px 5px 20px ;
+}
+nav ul li  li {
+	position: relative;
+	top: 0px;
+	left: 5px;
+	margin-top: 0px;
+	border-left: 0px  solid;
+	border-bottom: 1px  solid #cccccc;
+	width: 90px;
+	height: 40px;
+	background:#000;
+}
+nav ul li  li:hover {
+	border-bottom: 1px  solid #fff;
+}
+nav ul li  li a{
+	font-size:12px;
+	color: #fff;
+	line-height:40px;
+}
+nav ul li  li:hover a{
+	color: #cccccc;
+}
+nav ul li:hover ul,nav ul ul li:hover ul {
+	display: block;
+}
+ul.clearfix{
+	clear:both;
+}
+section{
+	margin:0 auto;
+	margin-top: 10px;
+	padding: 0px 35px 60px 35px ;
+	background:#fff;
+}
+h1,h2{
+	margin:0 auto;
+	margin-top: 18px;
+	padding-top:30px;
+	text-align: center;
+	font-size:30px;
+	font-family:Verdana, Geneva, sans-serif;
+	font-weight: 300;
+	color: #222222;
+}
+p{
+	margin: 5px;
+	font-size:18px;
+	font-family:Verdana, Geneva, sans-serif;
+	color: #222222;
+}
+.submit{
+	padding: 2px;
+	border:1px solid #ccc;
+	background: #000;
+	color: #fff;
+}
+.submit:hover{
+	border:1px solid #000;
+	background: #fff;
+	color: #000;
+}
+
