@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <!--<ion-input placeholder="Enter text" [(ngModel)]="s"></ion-input>-->
+  <ion-slides pager style="height: auto" pager="false">
+    <ion-slide style="background: #ffffff">
+      <h1> Page 1 </h1>
+
+      <div>
+      <button ion-button (click)="show_prompt()">Enter name</button>
+
+      <!--<ion-input placeholder="Enter name" [(ngModel)]="fn"></ion-input>-->
+      <!--<ion-input placeholder="Enter surname" [(ngModel)]="ln"></ion-input>-->
+      <!--<ion-input placeholder="Enter dish" [(ngModel)]="fd"></ion-input>-->
+
+      <button ion-button (click)="takePic()">Take picture</button>
+      <!--<button ion-button (click)="showPic()">Show</button>-->
+      </div>
+      <!--{{shotURI}}-->
+      <div>
+        <button ion-button (click)="onAdd()">Add</button>
+        <button ion-button (click)="onRead()">Read</button>
+        <button ion-button (click)="onWrite()">Write</button>
+      </div>
+
+
+      <ion-list>
+        <ion-item *ngFor="let item of obj.items; let i of index">
+          <div>
+            <p>{{item.fn}}</p>
+            <p>{{item.ln}}</p>
+            <img [src]="item.shotURI" />
+            <!--*ngIf="shotURI"-->
+          </div>
+
+          <!--<p>{{item.fd}}</p>-->
+          <button ion-button (click)="onDelete(i)">Delete</button>
+        </ion-item>
+      </ion-list>
+
+    </ion-slide>
+    <ion-slide style="background: #ffedde">
+      <h1> Page 2 </h1>
+
+      <p>Heeey! There is nothing here yet/</p>
+
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>
