@@ -1,0 +1,8 @@
+'use strict';
+
+module.exports ={
+	TASK_STATUS_WAITING : 1,
+	TASK_STATUS_IMPLEMENTATION : 2,
+	TASK_STATUS_VERIFYING : 3,
+	TASK_STATUS_RELEASING : 4
+};
