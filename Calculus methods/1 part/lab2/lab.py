@@ -39,7 +39,7 @@ def mnogolhlen_lagranza(x,y,t):
 def main():
     x = np.array([0,math.pi/6,math.pi/4,math.pi/3,math.pi/12])
     x_in = math.pi/5
-    y_ex = np.tan(x_in)
+    y_ex = np.tan(x_in)**2
     y = np.tan(x)**2
     xnew = np.linspace(np.min(x),np.max(x),100)
     ynew = [mnogolhlen_lagranza(x,y,i) for i in xnew]
