@@ -5,7 +5,11 @@ import math
 
 
 def find_y_in_x(X,Y,x):
-    return x
+    m=  len(X)
+    y = Y.copy()
+    for k in range(1,m):
+        y[0:m-k] = ((x-X[k:m])*y[0:m-k] + (X[0:m-k]-x)*y[1:m-k+1])/(X[0:m-k]-X[k:m])
+    return y[0]
 
 
 def main():
