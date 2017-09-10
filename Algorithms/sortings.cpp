@@ -19,7 +19,7 @@ void merge(std::vector<int> & arr, int l, int m, int r)
 
     while (i < n1 && j < n2)
     {
-        arr[k++] = L[i] > R[j] ? L[i++] : R[j++];
+        arr[k++] = L[i] < R[j] ? L[i++] : R[j++];
     }
 
     i == n1 ? std::memcpy(&arr[k],(R+j),sizeof(arr[0])*(n2-j)) : std::memcpy(&arr[k],(L+i),sizeof(arr[0])*(n1-i));
@@ -81,7 +81,8 @@ int main()
     }
     int ans = 0;
     int best_time = INT32_MAX;
-    quick_sort(arr,0,length-1,10000);
+//    merge_sort(arr,0,arr.size()-1);
+//    quick_sort(arr,0,length-1,10000);
 //    while ( N < length)
 //    {
 //        std::clock_t start = std::clock();
