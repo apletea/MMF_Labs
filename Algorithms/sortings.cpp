@@ -5,6 +5,38 @@
 #include <cstring>
 
 
+bool is_sorted(std::vector<int> & arr, int l, int r)
+{
+    int i;
+    for( i = l; i < r; ++i )
+    {
+        if (arr[i] < arr[i+1])
+            continue;
+        break;
+    }
+    if (i == r)
+        return true;
+    return false;
+
+}
+
+void buble_sort(std::vector<int> & arr, int l, int r)
+{
+    if (is_sorted(arr,l,r))
+        return;
+    for (int i = l, step = 0; i < r; ++i,step++)
+    {
+        for (int j = l; j < r-step; ++j)
+        {
+            if (arr[j] > arr[j+1])
+            {
+                int tmp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = tmp;
+            }
+        }
+    }
+}
 
 void merge(std::vector<int> & arr, int l, int m, int r)
 {
@@ -81,22 +113,23 @@ int main()
     }
     int ans = 0;
     int best_time = INT32_MAX;
-//    merge_sort(arr,0,arr.size()-1);
-//    quick_sort(arr,0,length-1,10000);
-//    while ( N < length)
-//    {
-//        std::clock_t start = std::clock();
-//        quick_sort(arr,0,length-1,N);
-//        double time = (double)(std::clock()-start)/CLOCKS_PER_SEC;
+    buble_sort(arr,0,arr.size()-1);
+    //    merge_sort(arr,0,arr.size()-1);
+    //    quick_sort(arr,0,length-1,10000);
+    //    while ( N < length)
+    //    {
+    //        std::clock_t start = std::clock();
+    //        quick_sort(arr,0,length-1,N);
+    //        double time = (double)(std::clock()-start)/CLOCKS_PER_SEC;
 
-//        if (best_time > time)
-//        {
-//            ans = start;
-//            best_time  = start;
-//        }
-//        std::cout << time << std::endl;
-//    }
-//    std::cout << "Best depth is" << ans << "  for array length of " << length <<   std::endl;
+    //        if (best_time > time)
+    //        {
+    //            ans = start;
+    //            best_time  = start;
+    //        }
+    //        std::cout << time << std::endl;
+    //    }
+    //    std::cout << "Best depth is" << ans << "  for array length of " << length <<   std::endl;
     for (auto num : arr)
     {
         std::cout << num << std::endl;
