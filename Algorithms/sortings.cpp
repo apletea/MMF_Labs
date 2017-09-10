@@ -8,19 +8,22 @@
 
 void merge(std::vector<int> & arr, int l, int m, int r)
 {
-    int i, j, k;
+
+    int i = 0, j = 0, k = l;
     int n1 = m - l +1;
     int n2  = r - m;
-    
     int L[n1], R[n2];
-    
-    std::memcpy(L,arr.);
-    std::memcpy();
-    
-    i = 0;
-    j = 0;
-    k = l;
-    
+
+    std::memcpy(L,&arr[l],sizeof(arr[0])*n1);
+    std::memcpy(R,&arr[m+1],sizeof(arr[0])*n2);
+
+    while (i < n1 && j < n2)
+    {
+        arr[k++] = L[i] > R[j] ? L[i++] : R[j++];
+    }
+
+    i == n1 ? std::memcpy(&arr[k],(R+j),sizeof(arr[0])*(n2-j)) : std::memcpy(&arr[k],(L+i),sizeof(arr[0])*(n1-i));
+
 }
 
 
@@ -28,17 +31,14 @@ void merge_sort(std::vector<int> & arr ,int l, int r)
 {
     if (l < r)
     {
-
         int m = l+(r-l)/2;
- 
         merge_sort(arr, l, m);
         merge_sort(arr, m+1, r);
- 
         merge(arr, l, m, r);
     }
 }
 
-void quick_sort(std::vector<int>& arr,int left, int right,int N = 20, int depth = 0)
+void quick_sort(std::vector<int> & arr,int left, int right,int N = 20, int depth = 0)
 {
 
     if (depth > N)
@@ -62,6 +62,11 @@ void quick_sort(std::vector<int>& arr,int left, int right,int N = 20, int depth 
         quick_sort(arr,i,right,depth+1);
     if (j > left)
         quick_sort(arr,left,j,depth+1);
+}
+
+void quick_sort(std::vector<int> & arr,int left, int right)
+{
+    quick_sort(arr,left,right,INT32_MAX,INT32_MIN);
 }
 
 int main()
@@ -97,4 +102,3 @@ int main()
     }
     return 0;
 }
-
