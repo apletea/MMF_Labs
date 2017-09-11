@@ -113,8 +113,8 @@ int main()
     }
     int ans = 0;
     int best_time = INT32_MAX;
-    buble_sort(arr,0,arr.size()-1);
-    //    merge_sort(arr,0,arr.size()-1);
+//    buble_sort(arr,0,arr.size()-1);
+    merge_sort(arr,0,arr.size()-1);
     //    quick_sort(arr,0,length-1,10000);
     //    while ( N < length)
     //    {
