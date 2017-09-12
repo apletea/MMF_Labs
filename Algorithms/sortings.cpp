@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <vector>
 #include <stdlib.h>
@@ -103,36 +104,39 @@ void quick_sort(std::vector<int> & arr,int left, int right)
 
 int main()
 {
-    const int N = 4;
     int length = 0;
-    std::cin >> length;
-    std::vector<int32_t> arr(length,0);
-    for (int i = 0; i < length; ++i)
+    for (length = 500000; length < 1000000; ++length)
     {
-        arr[i] = std::rand()%(length*150)-50;
-    }
-    int ans = 0;
-    int best_time = INT32_MAX;
-//    buble_sort(arr,0,arr.size()-1);
-    merge_sort(arr,0,arr.size()-1);
-    //    quick_sort(arr,0,length-1,10000);
-    //    while ( N < length)
-    //    {
-    //        std::clock_t start = std::clock();
-    //        quick_sort(arr,0,length-1,N);
-    //        double time = (double)(std::clock()-start)/CLOCKS_PER_SEC;
+        int N = 4;
+        int ans = 0;
+        int best_time = INT32_MAX;
+        //  buble_sort(arr,0,arr.size()-1);
+        //  merge_sort(arr,0,arr.size()-1);
+        while ( N < length)
+        {
 
-    //        if (best_time > time)
-    //        {
-    //            ans = start;
-    //            best_time  = start;
-    //        }
-    //        std::cout << time << std::endl;
-    //    }
-    //    std::cout << "Best depth is" << ans << "  for array length of " << length <<   std::endl;
-    for (auto num : arr)
-    {
-        std::cout << num << std::endl;
+            std::vector<int32_t> arr(length,0);
+            for (int i = 0; i < length; i+=4)
+            {
+                arr[i] = std::rand()%(length*150)-50;
+                arr[i+1] = std::rand()%(length*150)-50;
+                arr[i+2] = std::rand()%(length*150)-50;
+                arr[i+3] = std::rand()%(length*150)-50;
+            }
+            std::clock_t start = std::clock();
+            quick_sort(arr,0,length-1,N);
+            double time = (double)(std::clock()-start)/CLOCKS_PER_SEC;
+
+            if (best_time > time)
+            {
+                ans = N;
+                best_time  = time;
+            }
+            N++;
+            //std::cout << time << std::endl;
+        }
+        std::cout << "Best depth is " << ans << " for array length of " << length <<   std::endl;
+
     }
     return 0;
 }
