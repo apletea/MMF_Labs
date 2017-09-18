@@ -1,10 +1,10 @@
-
 #include <iostream>
 #include <vector>
 #include <stdlib.h>
 #include <ctime>
 #include <cstring>
 #include <chrono>
+#include <bits/stdc++.h>
 
 bool is_sorted(std::vector<int> & arr, int l, int r)
 {
@@ -104,39 +104,29 @@ void quick_sort(std::vector<int> & arr,int left, int right)
 
 int main()
 {
-    int length = 0;
-    for (length = 500000; length < 1000000; ++length)
+    std::vector<int> arr(500000);
+    std::ifstream in("/home/davinci/numbers.txt");
+    int ans = 0;
+    int time = INT_MAX;
+    for (int i = 10; i < 500000; ++i)
     {
-        int N = 4;
-        int ans = 0;
-        int best_time = INT32_MAX;
-        //  buble_sort(arr,0,arr.size()-1);
-        //  merge_sort(arr,0,arr.size()-1);
-        while ( N < length)
+        for (int j = 0; j < 500000; ++j)
         {
-
-            std::vector<int32_t> arr(length,0);
-            for (int i = 0; i < length; i+=4)
-            {
-                arr[i] = std::rand()%(length*150)-50;
-                arr[i+1] = std::rand()%(length*150)-50;
-                arr[i+2] = std::rand()%(length*150)-50;
-                arr[i+3] = std::rand()%(length*150)-50;
-            }
-            std::clock_t start = std::clock();
-            quick_sort(arr,0,length-1,N);
-            double time = (double)(std::clock()-start)/CLOCKS_PER_SEC;
-
-            if (best_time > time)
-            {
-                ans = N;
-                best_time  = time;
-            }
-            N++;
-            //std::cout << time << std::endl;
+            in >> arr[j];
         }
-        std::cout << "Best depth is " << ans << " for array length of " << length <<   std::endl;
+
+        std::clock_t start = std::clock();
+        quick_sort(arr,0,499999,i);
+        double ttime = std::clock();
+        ttime = (double)(ttime - start)/CLOCKS_PER_SEC;
+        if (ttime < time )
+        {
+            std::cout << i << std::endl;
+            ans = i;
+            time = ttime;
+        }
 
     }
+    std::cout << "the best depth =" << ans << "  for length =" << 500000 << std::endl;
     return 0;
 }
