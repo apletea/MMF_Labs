@@ -107,10 +107,10 @@ int main()
     std::vector<int> arr(500000);
     std::ifstream in("/home/davinci/numbers.txt");
     int ans = 0;
-    int time = INT_MAX;
-    for (int i = 10; i < 500000; ++i)
+    double time = INT_MAX;
+    for (volatile int i = 2000; i < 500000; i+=1000)
     {
-        for (int j = 0; j < 500000; ++j)
+        for (volatile int j = 0; j < 500000; ++j)
         {
             in >> arr[j];
         }
@@ -119,14 +119,16 @@ int main()
         quick_sort(arr,0,499999,i);
         double ttime = std::clock();
         ttime = (double)(ttime - start)/CLOCKS_PER_SEC;
-        if (ttime < time )
+        if (ttime < time && ttime != 0)
         {
             std::cout << i << std::endl;
             ans = i;
             time = ttime;
         }
+        std::cout << ttime << " and min =" << time<<std::endl;
 
     }
     std::cout << "the best depth =" << ans << "  for length =" << 500000 << std::endl;
     return 0;
 }
+// ans = 92000
