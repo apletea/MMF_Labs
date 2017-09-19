@@ -75,7 +75,7 @@ void quick_sort(std::vector<int> & arr,int left, int right,int N = 20, int depth
 {
 
     if (depth > N)
-        merge_sort(arr,left,right);
+        buble_sort(arr,left,right);
     int i = left, j = right;
     int mid = arr[(i+j)/2];
     while ( i <= j )
@@ -105,30 +105,33 @@ void quick_sort(std::vector<int> & arr,int left, int right)
 int main()
 {
     std::vector<int> arr(500000);
-    std::ifstream in("/home/davinci/numbers.txt");
-    int ans = 0;
-    double time = INT_MAX;
-    for (volatile int i = 2000; i < 500000; i+=1000)
+    std::vector<std::string> files = {"/home/davinci/numbers.txt2","/home/davinci/numbers3.txt","/home/davinci/numbers4.txt"};
+    for (auto file : files)
     {
-        for (volatile int j = 0; j < 500000; ++j)
+        std::ifstream in(file);
+        int ans = 0;
+        double time = INT_MAX;
+        for (volatile int i = 2; i < 150; ++i)
         {
-            in >> arr[j];
-        }
+            for (volatile int j = 0; j < 500000; ++j)
+            {
+                in >> arr[j];
+            }
 
-        std::clock_t start = std::clock();
-        quick_sort(arr,0,499999,i);
-        double ttime = std::clock();
-        ttime = (double)(ttime - start)/CLOCKS_PER_SEC;
-        if (ttime < time && ttime != 0)
-        {
-            std::cout << i << std::endl;
-            ans = i;
-            time = ttime;
-        }
-        std::cout << ttime << " and min =" << time<<std::endl;
+            std::clock_t start = std::clock();
+            quick_sort(arr,0,499999,i);
+            double ttime = std::clock();
+            ttime = (double)(ttime - start)/CLOCKS_PER_SEC;
+            if (ttime < time )
+            {
+                std::cout << i << std::endl;
+                ans = i;
+                time = ttime;
+            }
+            std::cout << ttime << " and min =" << time<<"  depth=" <<  ans<<std::endl;
 
+        }
+        std::cout << "the best depth =" << ans << "  for length =" << 500000 << std::endl;
     }
-    std::cout << "the best depth =" << ans << "  for length =" << 500000 << std::endl;
     return 0;
 }
-// ans = 92000
