@@ -108,12 +108,35 @@ namespace hello_search
            }
        }
        
-       void balance()
+       void rotation()
        {
            
        }
        
+       void ideal_balance(std::vector<int> & arr = {}, BST * root = this)
+       {
+           if (!root)
+               return;
+           ideal_balance(arr,root->left);
+           arr.push_back(root->val);
+           ideal_balance(arr,root->right);
+           if (!root->left & !root->right)
+               this = create_min_bst(arr,0,arr.size()-1);
+       }
+       
+       
     private:
+       
+       static BST * create_min_bst(static std::vector<int> & arr, int start, int end)
+       {
+           if (end < start)
+               return NULL;
+           int mid = start + (end - start)/2;
+           BST * node = new BST(arr[mid]);
+           node->left = create_min_bst(arr,start,mid-1);
+           node->right = create_min_bst(arr, mid+1, end);
+           return node;
+       }
        
        void dfs(BST * root,std::vector<std::vector<int>> & arr,int depth = 0)
        {
