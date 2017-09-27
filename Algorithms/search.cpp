@@ -65,22 +65,69 @@ namespace hello_search
             this->right = NULL;
         }
 
-        BST * find(int to_find,BST * root)
+        static BST * find(int to_find,BST * root,BST * prev = NULL)
         {
             if (!root)
-                return root;
+                return prev;
             else if (root->val == to_find)
                 return root;
             else if(root->val > to_find)
-                return find(to_find, root->left);
+                return find(to_find, root->left, root);
             else
-                return find(to_find, root->right);
+                return find(to_find, root->right, root);
         }
-        
+
         void insert(int val)
         {
-           
+           BST * node = find(val,this);
+           if (node->val == val)
+               return;
+           else
+           {
+               if (node->val < val)
+                   node->right = new BST(val);
+               else
+                   node->left = new BST(val);
+           }
         }
+
+       void print(std::ofstream & out)
+       {
+           std::vector<std::vector<int>> vals;
+           this->dfs(this,vals);
+           int N = vals.size();
+           for (int i = 0;i < N; ++i)
+           {
+               out << "level:" << i << " values: ";
+               int M = vals[i].size();
+               for (int j = 0; j < M ; ++j)
+               {
+                   out << vals[i][j];
+               }
+               out << std::endl;
+           }
+       }
+       
+       void balance()
+       {
+           
+       }
+       
+    private:
+       
+       void dfs(BST * root,std::vector<std::vector<int>> & arr,int depth = 0)
+       {
+           if (!root)
+               return;
+           if (arr.size() == depth)
+           {
+               std::vector<int> t;
+               arr.push_back(t);
+           }
+           arr[depth].push_back(root->val);
+           dfs(root->left, arr, depth+1);
+           dfs(root->right, arr, depth+1);
+       }
     };
 }
 
@@ -98,4 +145,3 @@ int main()
     std::cout << a << std::endl;
     return 0;
 }
-
