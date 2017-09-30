@@ -102,7 +102,7 @@ void quick_sort(std::vector<int> & arr,int left, int right)
     quick_sort(arr,left,right,INT32_MAX,INT32_MIN);
 }
 
-int main()
+int main(int argc, char * argv[])
 {
     std::vector<int> arr(500000);
     std::vector<std::string> files = {"/home/davinci/numbers.txt2","/home/davinci/numbers3.txt","/home/davinci/numbers4.txt"};
