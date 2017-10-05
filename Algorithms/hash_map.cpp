@@ -21,10 +21,40 @@ ________$$$$_________$$
 
 namespace IRA
 {
+    
     template <typename K, typename V>
-    class hash_map
+    class hash_map_ll
     {
         
+    };
+    
+    template <typename T>
+    class linked_list
+    {
+        linked_list * next;
+        linked_list * tail;
+        T val;
+        linked_list(T val)
+        {
+            this->next = NULL;
+            this->tail = this;
+            this->val = val;
+        }
+        
+        void append(T val)
+        {
+            this->tail->next = new linked_list(val);
+        }
+        
+        linked_list * find(T val)
+        {
+            linked_list * node = this;
+            while (node || node->val!= val)
+            {
+                node = node->next;
+            }
+            return node;
+        }
     };
 }
 
