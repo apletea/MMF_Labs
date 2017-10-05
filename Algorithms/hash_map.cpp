@@ -21,13 +21,58 @@ ________$$$$_________$$
 
 namespace IRA
 {
-    
+    std::vector<int> siephe_eratosphene(int max)
+    {
+        std::vector<bool> prime (max+1, true);
+        prime[0] = prime[1] = false;
+        for (int i=2; i<=max; ++i)
+            if (prime[i])
+                if (i * 1ll * i <= max)
+                    for (int j=i*i; j<=max; j+=i)
+                        prime[j] = false;
+        std::vector<int> ans;
+        for (int i = 0; i < max+1; ++i)
+            if (prime[i])
+                ans.push_back(i);
+        return ans;
+    }
+
+    int find_closest_prime(int k)
+    {
+        std::vector<int> primes = siephe_eratosphene(250);
+        int i = 0;
+        while(primes[i++]<100);
+        while(k--) i++;
+        return primes[i];
+    }
+
     template <typename K, typename V>
     class hash_map_ll
     {
+        std::vector<linked_list*> data_storage;
+    public:
+        hash_map_ll(int val)
+        {
+            this->data_storage.resize(val);
+        }
+        
+        void add(K key, V val)
+        {
+            
+        }
+         
+        void find(K key)
+        {
+            
+        }
+        
+        void remove(K key)
+        {
+            
+        }
         
     };
-    
+
     template <typename T>
     class linked_list
     {
@@ -40,12 +85,12 @@ namespace IRA
             this->tail = this;
             this->val = val;
         }
-        
+
         void append(T val)
         {
             this->tail->next = new linked_list(val);
         }
-        
+
         linked_list * find(T val)
         {
             linked_list * node = this;
@@ -121,6 +166,12 @@ namespace init
 
 int main()
 {
-   
+    std::vector<int> primes = IRA::siephe_eratosphene(200);
+    for (int a : primes)
+    {
+        std::cout << a << std::endl;
+    }
+
+    std::cout << IRA::find_closest_prime(11) << std::endl;
 
 }
