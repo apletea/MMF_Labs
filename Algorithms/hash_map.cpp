@@ -46,33 +46,6 @@ namespace IRA
         return primes[i];
     }
 
-    template <typename K, typename V>
-    class hash_map_ll
-    {
-        std::vector<linked_list*> data_storage;
-    public:
-        hash_map_ll(int val)
-        {
-            this->data_storage.resize(val);
-        }
-        
-        void add(K key, V val)
-        {
-            
-        }
-         
-        void find(K key)
-        {
-            
-        }
-        
-        void remove(K key)
-        {
-            
-        }
-        
-    };
-
     template <typename T>
     class linked_list
     {
@@ -100,7 +73,68 @@ namespace IRA
             }
             return node;
         }
+
+        void delete_node(linked_list * node)
+        {
+
+        }
     };
+
+
+    template <typename K, typename V>
+    class hash_map_ll
+    {
+        std::vector<linked_list<std::pair<K,V>>*> data_storage;
+
+        int get_hash(K key)
+        {
+            return static_cast<int>(key);
+        }
+
+    public:
+        hash_map_ll(int val)
+        {
+            this->data_storage = std::vector<linked_list<std::pair<K,V>> *>(val,NULL);
+        }
+
+        void add(K key, V val)
+        {
+            std::pair<K,V> pr = {key,val};
+            if (is_empty(key))
+                data_storage[get_hash(key)%data_storage.size()] = new linked_list<std::pair<K,V>>(pr);
+            else
+                data_storage[get_hash(key)%data_storage.size()].append(pr);
+        }
+
+        V find(K key)
+        {
+            if (is_empty(key))
+                return NULL;
+            return find_in_ll(data_storage[get_hash(key)%data_storage.size()], key).val.second;
+        }
+
+        void remove(K key)
+        {
+            if (is_empty(key))
+                return;
+           (data_storage[get_hash(key)%data_storage.size()]).delete_node(find_in_ll(data_storage[get_hash(key)%data_storage.size()], key).val.second);
+
+        }
+    private:
+        linked_list<std::pair<K,V>> find_in_ll(linked_list<std::pair<K,V>> head, K key)
+        {
+            while(head && head.val.first != key)
+                head = head->next;
+            return head;
+        }
+
+        bool is_empty(K key)
+        {
+            return !data_storage[get_hash(key)%data_storage.size()];
+        }
+
+    };
+
 }
 
 namespace init
