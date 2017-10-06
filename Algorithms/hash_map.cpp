@@ -19,7 +19,7 @@ ________$$$$_________$$
 
 #include <bits/stdc++.h>
 
-namespace IRA
+namespace IRA // yoou go to hell
 {
     std::vector<int> siephe_eratosphene(int max)
     {
@@ -205,7 +205,7 @@ int main()
     {
         std::cout << a << std::endl;
     }
-
+    std::cout << "IRA!!!" << std::endl;
     std::cout << IRA::find_closest_prime(11) << std::endl;
 
 }
