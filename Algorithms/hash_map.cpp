@@ -19,8 +19,11 @@ ________$$$$_________$$
 
 #include <bits/stdc++.h>
 
+
+
 namespace IRA // yoou go to hell
 {
+
     std::vector<int> siephe_eratosphene(int max)
     {
         std::vector<bool> prime (max+1, true);
@@ -63,6 +66,7 @@ namespace IRA // yoou go to hell
         void append(T val)
         {
             this->tail->next = new linked_list(val);
+            this->tail = this->tail->next;
         }
 
         linked_list * find(T val)
@@ -78,23 +82,12 @@ namespace IRA // yoou go to hell
         void delete_node(linked_list * node)
         {
             linked_list * runner = this;
-            while(node && runner->next != node)
+            while(runner && runner->next != node)
                 runner= runner->next;
-            if (node)
+            if (runner)
             runner->next = runner->next->next;
         }
 
-        void print()
-        {
-            linked_list * runner = this;
-            while(runner)
-            {
-                std::cout << runner->val << "  ";
-                runner = runner->next;
-            }
-            std::cout << std::endl;
-
-        }
     };
 
 
@@ -106,9 +99,10 @@ namespace IRA // yoou go to hell
 
         linked_list<std::pair<K,V>> * find_in_ll(linked_list<std::pair<K,V>>* head, K key)
         {
-            while((head) && head->val.first != key)
-                head = head->next;
-            return head;
+            linked_list<std::pair<K,V>> * tmp = head;
+            while((tmp) && tmp->val.first != key)
+                tmp = tmp->next;
+            return tmp;
         }
 
         bool is_empty(K key)
@@ -121,6 +115,18 @@ namespace IRA // yoou go to hell
             return static_cast<int>(key);
         }
 
+
+        void print(linked_list<std::pair<K,V>> * ll)
+        {
+            linked_list<std::pair<K,V>> * runner = ll;
+            while(runner)
+            {
+                std::cout << " {"<< runner->val.first << " , " << runner->val.second << "}  ";
+                runner = runner->next;
+            }
+            std::cout << std::endl;
+
+        }
     public:
         hash_map_ll(int val)
         {
@@ -147,15 +153,19 @@ namespace IRA // yoou go to hell
         {
             if (is_empty(key))
                 return;
-           data_storage[get_hash(key)%data_storage.size()]->delete_node(find_in_ll(data_storage[get_hash(key)%data_storage.size()], key)->val.second);
+           linked_list<std::pair<K,V>> * list = data_storage[get_hash(key)%data_storage.size()];
+           int index = get_hash(key)%data_storage.size();
+           data_storage[index]->delete_node(find_in_ll(list, key));
 
         }
+
 
         void print()
         {
             for (int i = 0; i < data_storage.size(); ++i)
             {
-               (data_storage[i]->print());
+                std::cout << "i:=" << i << " :   ";
+               (print(data_storage[i]));
             }
         }
 
