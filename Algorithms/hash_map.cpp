@@ -76,7 +76,10 @@ namespace IRA // yoou go to hell
 
         void delete_node(linked_list * node)
         {
-
+            linked_list runner = this;
+            while(runner->next != node)
+                runner= runner->next;
+            runner->next = runner->next->next;
         }
     };
 
