@@ -82,7 +82,12 @@ namespace IRA // yoou go to hell
         void delete_node(linked_list * node)
         {
             linked_list * runner = this;
-            while(runner && runner->next != node)
+            if (runner == node)
+            {
+                this->val = runner->next->val;
+                this->next = runner->next->next;
+            }
+            while((runner && runner->next != node))
                 runner= runner->next;
             if (runner)
             runner->next = runner->next->next;
@@ -261,3 +266,4 @@ int main()
     mp.print();
 
 }
+
