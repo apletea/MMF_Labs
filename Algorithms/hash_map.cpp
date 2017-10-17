@@ -96,15 +96,15 @@ namespace IRA // yoou go to hell
     };
 
 
-    template <typename K, typename V>
+    template <typename K>
     class hash_map_ll
     {
     private:
-        std::vector<linked_list<std::pair<K,V>>*> data_storage;
+        std::vector<linked_list<std::pair<K,K>>*> data_storage;
 
-        linked_list<std::pair<K,V>> * find_in_ll(linked_list<std::pair<K,V>>* head, K key)
+        linked_list<std::pair<K,K>> * find_in_ll(linked_list<std::pair<K,K>>* head, K key)
         {
-            linked_list<std::pair<K,V>> * tmp = head;
+            linked_list<std::pair<K,K>> * tmp = head;
             while((tmp) && tmp->val.first != key)
                 tmp = tmp->next;
             return tmp;
@@ -121,12 +121,12 @@ namespace IRA // yoou go to hell
         }
 
 
-        void print(linked_list<std::pair<K,V>> * ll)
+        void print(linked_list<std::pair<K,K>> * ll)
         {
-            linked_list<std::pair<K,V>> * runner = ll;
+            linked_list<std::pair<K,K>> * runner = ll;
             while(runner)
             {
-                std::cout << " {"<< runner->val.first << " , " << runner->val.second << "}  ";
+                std::cout << " {"<< runner->val.first << "}  ";
                 runner = runner->next;
             }
             std::cout << std::endl;
@@ -135,19 +135,20 @@ namespace IRA // yoou go to hell
     public:
         hash_map_ll(int val)
         {
-            this->data_storage = std::vector<linked_list<std::pair<K,V>> *>(val,NULL);
+            this->data_storage = std::vector<linked_list<std::pair<K,K>> *>(val,NULL);
         }
 
-        void add(K key, V val)
+        void add(K key, K val = 0)
         {
-            std::pair<K,V> pr = {key,val};
+            val = key;
+            std::pair<K,K> pr = {key,val};
             if (is_empty(key))
-                data_storage[get_hash(key)%data_storage.size()] = new linked_list<std::pair<K,V>>(pr);
+                data_storage[get_hash(key)%data_storage.size()] = new linked_list<std::pair<K,K>>(pr);
             else
                 data_storage[get_hash(key)%data_storage.size()]->append(pr);
         }
 
-        V find(K key)
+        K find(K key)
         {
             if (is_empty(key))
                 return NULL;
@@ -158,7 +159,7 @@ namespace IRA // yoou go to hell
         {
             if (is_empty(key))
                 return;
-           linked_list<std::pair<K,V>> * list = data_storage[get_hash(key)%data_storage.size()];
+           linked_list<std::pair<K,K>> * list = data_storage[get_hash(key)%data_storage.size()];
            int index = get_hash(key)%data_storage.size();
            data_storage[index]->delete_node(find_in_ll(list, key));
 
@@ -246,23 +247,25 @@ int main()
     {
         std::cout << a << std::endl;
     }
-    IRA::hash_map_ll<int,int> mp(IRA::find_closest_prime(11));
-    for (int i = 0; i < 10000; ++i)
-    {
-        mp.add(i,std::rand()%400);
-    }
-    std::cout << "mp after init" << std::endl;
-    mp.print();
-    std::cout << "find in mp vy key from 1 to 10" << std::endl;
-    for (int i = 0; i < 10; ++i)
-    {
-        std::cout << mp.find(i) << std::endl;
-    }
-    std::cout << "after deleting in mp from 1 to 10" << std::endl;
-    for (int i  = 0; i < 10; ++i)
-    {
-        mp.remove(i);
-    }
+    IRA::hash_map_ll<int> mp(IRA::find_closest_prime(1));
+//    for (int i = 0; i < 10000; ++i)
+//    {
+//        mp.add(i,std::rand()%400);
+//    }
+//    std::cout << "mp after init" << std::endl;
+//    mp.print();
+//    std::cout << "find in mp vy key from 1 to 10" << std::endl;
+//    for (int i = 0; i < 10; ++i)
+//    {
+//        std::cout << mp.find(i) << std::endl;
+//    }
+//    std::cout << "after deleting in mp from 1 to 10" << std::endl;
+//    for (int i  = 0; i < 10; ++i)
+//    {
+//        mp.remove(i);
+//    }
+    mp.add(1);
+    mp.add(15);
     mp.print();
 
 }
