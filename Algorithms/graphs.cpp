@@ -15,12 +15,12 @@ public:
         return nullptr;
     }
     
-    static graph* create_directed()
+    static std::vector<std::vector> create_directed(int n)
     {
         return nullptr;
     }
     
-    std::map<std::pair<int,int>,short int> get_maze()
+    static std::map<std::pair<int,int>,short int> get_maze()
     {
         
     }
@@ -37,7 +37,6 @@ public:
         {
             
             graph* v = st.top();
-            graph* tmp;
             for (auto neighbor : v->neignbohrs)
             {
                 neighbor->neignbohrs.remove(v);
@@ -51,17 +50,36 @@ public:
         
     }
     
-    bool is_bound_graph()
+    static bool is_bound_graph(int graph_size,graph* root)
     {
-        
+        std::stack<graph*> st;
+        std::set<graph*> edges;
+        st.push(root);
+        while(!st.empty())
+        {
+            graph* v = st.top();
+            st.pop();
+            edges.insert(v);
+            if (edges.find(v)!=edges.end())
+                continue;
+            for(auto neighbor : v->neignbohrs)
+            {
+                st.push(neighbor);
+            }
+            
+        }
+        return edges.size() == graph_size;
     }
     
-    int dejkstra()
+    static int dejkstra(std::vector < std::vector < std::pair<int,int> > > g)
     {
-        
+        std::vector<int> d (n, INT32_MAX), p(n);
+        graph* s = 
+        d[this->val] = 0;
+        std::vector<char> u (n);
     }
     
-    std::vector<int> find_path()
+    static std::vector<int> find_path()
     {
         
     }
@@ -79,10 +97,7 @@ private:
        return ans+edge->neignbohrs.size()%2;
     }
     
-    void delete_neighbor()
-    {
-        
-    }
+   
 };
 
 
