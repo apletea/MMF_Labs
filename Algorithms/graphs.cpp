@@ -87,9 +87,6 @@ public:
         mp[6]->neignbohrs.push_back(mp[5]);
         mp[6]->neignbohrs.push_back(mp[1]);
         mp[1]->neignbohrs.push_back(mp[6]);
-        
-        
-        
         mp[1]->neignbohrs.push_back(mp[3]);
         mp[3]->neignbohrs.push_back(mp[1]);
         mp[3]->neignbohrs.push_back(mp[5]);
@@ -103,22 +100,19 @@ public:
     static graph* create_bound(int n)
     {
         std::map<int,graph*> mp;
-        for (int i = 1; i <=  6; ++i)
+        for (int i = 1; i <=  n; ++i)
         {
             graph* tmp = new graph(i);
             mp[i] = tmp;
         }
-        return mp[1];
-    }
-    
-    static graph* create_unbound(int n)
-    {
-        std::map<int,graph*> mp;
-        for (int i = 1; i <=  6; ++i)
-        {
-            graph* tmp = new graph(i);
-            mp[i] = tmp;
-        }
+        mp[1]->neignbohrs.push_back(mp[2]);
+        mp[2]->neignbohrs.push_back(mp[3]);
+        mp[3]->neignbohrs.push_back(mp[4]);
+        mp[1]->neignbohrs.push_back(mp[6]);
+        mp[6]->neignbohrs.push_back(mp[5]);
+        mp[5]->neignbohrs.push_back(mp[4]);
+        mp[6]->neignbohrs.push_back(mp[2]);
+        mp[5]->neignbohrs.push_back(mp[2]);
         return mp[1];
     }
     
@@ -130,7 +124,7 @@ public:
             graph* tmp = new graph(i);
             mp[i] = tmp;
         }
-        
+
         mp[1]->neignbohrs.push_back(mp[2]);
         mp[2]->neignbohrs.push_back(mp[3]);
         mp[3]->neignbohrs.push_back(mp[4]);
@@ -139,7 +133,7 @@ public:
         mp[5]->neignbohrs.push_back(mp[4]);
         mp[6]->neignbohrs.push_back(mp[2]);
         mp[5]->neignbohrs.push_back(mp[2]);
-        
+
         weights[std::pair<graph*, graph*>{mp[1],mp[2]}] = 2;
         weights[std::pair<graph*, graph*>{mp[2],mp[3]}] = 6;
         weights[std::pair<graph*, graph*>{mp[3],mp[4]}] = 2;
@@ -148,7 +142,7 @@ public:
         weights[std::pair<graph*, graph*>{mp[6],mp[5]}] = 5;
         weights[std::pair<graph*, graph*>{mp[6],mp[2]}] = 2;
         weights[std::pair<graph*, graph*>{mp[5],mp[2]}] = 1;
-        
+
         return mp[1];
     }
     
@@ -198,13 +192,13 @@ public:
         {
             graph* v = st.top();
             st.pop();
-            edges.insert(v);
             if (edges.find(v)!=edges.end())
                 continue;
             for(auto neighbor : v->neignbohrs)
             {
                 st.push(neighbor);
             }
+            edges.insert(v);
             
         }
         return edges.size() == graph_size;
@@ -297,7 +291,7 @@ int main(int argc, char ** argv)
     //    //    std::cout << 1 << " ";
     //    for (auto v : ress)
     //    {
-    
+
     //        std::cout << v->val << " ";
     //    }
     //dijcstra
@@ -308,5 +302,12 @@ int main(int argc, char ** argv)
     //    {
     //        std::cout << "ver=" << v.first->val << " res=" << v.second << std::endl;
     //    }
-    
+    // bounded
+    int n = 6;
+    gf_graph::graph * root = gf_graph::graph::create_bound(n);
+    if (gf_graph::graph::is_bound_graph(n,root))
+        std::cout << "This graph bounded" << std::endl;
+    else
+        std::cout << "This graph unbounded" << std::endl;
+
 }
