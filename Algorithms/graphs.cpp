@@ -1,3 +1,28 @@
+// ███████▓█████▓▓╬╬╬╬╬╬╬╬▓███▓╬╬╬╬╬╬╬▓╬╬▓█ 
+// ████▓▓▓▓╬╬▓█████╬╬╬╬╬╬███▓╬╬╬╬╬╬╬╬╬╬╬╬╬█ 
+// ███▓▓▓▓╬╬╬╬╬╬▓██╬╬╬╬╬╬▓▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬▓█ 
+// ████▓▓▓╬╬╬╬╬╬╬▓█▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬▓█ 
+// ███▓█▓███████▓▓███▓╬╬╬╬╬╬▓███████▓╬╬╬╬▓█ 
+// ████████████████▓█▓╬╬╬╬╬▓▓▓▓▓▓▓▓╬╬╬╬╬╬╬█ 
+// ███▓▓▓▓▓▓▓╬╬▓▓▓▓▓█▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬▓█ 
+// ████▓▓▓╬╬╬╬▓▓▓▓▓▓█▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬▓█ 
+// ███▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬▓█ 
+// █████▓▓▓▓▓▓▓▓█▓▓▓█▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬▓█ 
+// █████▓▓▓▓▓▓▓██▓▓▓█▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬██ 
+// █████▓▓▓▓▓████▓▓▓█▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬██ 
+// ████▓█▓▓▓▓██▓▓▓▓██╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬██ 
+// ████▓▓███▓▓▓▓▓▓▓██▓╬╬╬╬╬╬╬╬╬╬╬╬█▓╬▓╬╬▓██ 
+// █████▓███▓▓▓▓▓▓▓▓████▓▓╬╬╬╬╬╬╬█▓╬╬╬╬╬▓██ 
+// █████▓▓█▓███▓▓▓████╬▓█▓▓╬╬╬▓▓█▓╬╬╬╬╬╬███ 
+// ██████▓██▓███████▓╬╬╬▓▓╬▓▓██▓╬╬╬╬╬╬╬▓███ 
+// ███████▓██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓╬╬╬╬╬╬╬╬╬╬╬████ 
+// ███████▓▓██▓▓▓▓▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬▓████ 
+// ████████▓▓▓█████▓▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬▓█████ 
+// █████████▓▓▓█▓▓▓▓▓███▓╬╬╬╬╬╬╬╬╬╬╬▓██████ 
+// ██████████▓▓▓█▓▓▓╬▓██╬╬╬╬╬╬╬╬╬╬╬▓███████ 
+// ███████████▓▓█▓▓▓▓███▓╬╬╬╬╬╬╬╬╬▓████████ 
+// ██████████████▓▓▓███▓▓╬╬╬╬╬╬╬╬██████████ 
+// ███████████████▓▓▓██▓▓╬╬╬╬╬╬▓███████████
 #include <bits/stdc++.h>
 
 
@@ -69,14 +94,33 @@ public:
             
         }
         return edges.size() == graph_size;
-    }
+    } 
     
-    static int dejkstra(std::vector < std::vector < std::pair<int,int> > > g)
+    
+    std::map<graph*, int> dejkstra(std::map<std::pair<graph*,graph*>,int> weights)
     {
-        std::vector<int> d (n, INT32_MAX), p(n);
-        graph* s = 
-        d[this->val] = 0;
-        std::vector<char> u (n);
+        std::set<graph*> is_visited;
+        std::map<graph*, int> res;
+        std::stack<graph*> st;
+        graph* v = this;
+        res[v] = 0;
+        st.push(v);
+        while(!st.empty())
+        {
+            v = st.top();
+            st.pop();
+            for (auto neighbor : v->neignbohrs)
+            {
+                if (res.find(neighbor)==res.end())
+                    res[neighbor] = weights[std::pair{v,neighbor}];
+                else
+                    res[neighbor] = std::min(res[neighbor],weights[std::pair{v,neighbor}]);
+                st.push(neighbor);
+            }
+            is_visited.insert(v);
+            
+        }
+        return res;
     }
     
     static std::vector<int> find_path()
@@ -86,18 +130,18 @@ public:
 private:
     static int is_valid_euler(graph* edge ,std::set<graph*> & is_visitetd)
     {
-       int ans = 0;
-       if (is_visitetd.find(edge)==is_visitetd.end())
+        int ans = 0;
+        if (is_visitetd.find(edge)==is_visitetd.end())
             return 0;
-       for(auto  neignhbor : edge->neignbohrs)
-       {
-           is_visitetd.insert(edge);
-           ans +=is_valid_euler(neignhbor, is_visitetd);
-       }
-       return ans+edge->neignbohrs.size()%2;
+        for(auto  neignhbor : edge->neignbohrs)
+        {
+            is_visitetd.insert(edge);
+            ans +=is_valid_euler(neignhbor, is_visitetd);
+        }
+        return ans+edge->neignbohrs.size()%2;
     }
     
-   
+    
 };
 
 
