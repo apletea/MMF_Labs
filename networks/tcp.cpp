@@ -119,9 +119,31 @@ void error(const char *msg)
 
 int main(int argc, char ** argv)
 {
+    char ze= 0;
+    char on= 1;
+    char sev= 17;
+    std::cout << ze << on << std::endl;
     TCPClient tcp;
     tcp.setup(ser_ip,potr);
+    while (true)
+    {
+        std::string tmp = "11111111";
+        tmp[0] = on;
+        tmp[1] = ze;
+        tmp[2] = ze;
+        tmp[3] = ze;
+
+        tmp[4] = sev;
+        tmp[5] = ze;
+        tmp[6] = ze;
+        tmp[7] = ze;
+        std::string msg = "Hex: |01 00 00 00|17 00 00 00|\"{\n \"name\": \"Boris\"\n}\"";
+
+        tcp.Send(msg);
+        std::string rec = tcp.receive();
+        std::cout << rec << std::endl;
+        sleep(5);
+    }
 
 }
-
 
