@@ -10,7 +10,7 @@
 #include <netdb.h>
 #include <netdb.h>
 #include <vector>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 class TCPClient
@@ -68,40 +68,42 @@ public:
         }
         return true;
     }
-    bool Send(string data)
+    bool Send(char * data, int size)
     {
-        if( send(sock , data.c_str() , strlen( data.c_str() ) , 0) < 0)
+        if( send(sock , data , size , 0) < 0)
         {
             cout << "Send failed : " << data << endl;
             return false;
         }
         return true;
     }
-    string receive(int size = 4096)
+    string receive(long & size)
     {
-        char buffer[size];
         string reply;
-        if( recv(sock , buffer , size, 0) < 0)// sizeof(buffer)
+        char buffer[4028];
+        recv(sock,buffer,8,0);
+        memcpy((void*)&size,buffer+4,4);
+        if(recv(sock , buffer , size, 0) < 0)// sizeof(buffer)
         {
             cout << "receive failed!" << endl;
         }
-        buffer[size]='\0';
-        reply = buffer;
+        reply += buffer;
+        //        buffer[size]='\0';
         return reply;
     }
-    string read()
+    string read(int &size)
     {
         char buffer[1] = {};
         string reply;
-        while (buffer[0] != '\n') {
-            if( recv(sock , buffer , sizeof(buffer) , 0) < 0)
-            {
-                cout << "receive failed!" << endl;
-                break;
-            }
+        while (recv(sock , buffer , sizeof(buffer) , 0) > 0) {
             reply += buffer[0];
         }
         return reply;
+    }
+
+    void closeCon()
+    {
+        close(sock);
     }
 };
 
@@ -116,34 +118,36 @@ void error(const char *msg)
     perror(msg);
     exit(1);
 }
-
+void print(const char * data, int size)
+{
+    for (int i = 0; i < size; ++i)
+    {
+        std::cout << data[i];
+    }
+}
 int main(int argc, char ** argv)
 {
-    char ze= 0;
-    char on= 1;
-    char sev= 17;
-    std::cout << ze << on << std::endl;
     TCPClient tcp;
     tcp.setup(ser_ip,potr);
-    while (true)
-    {
-        std::string tmp = "11111111";
-        tmp[0] = on;
-        tmp[1] = ze;
-        tmp[2] = ze;
-        tmp[3] = ze;
 
-        tmp[4] = sev;
-        tmp[5] = ze;
-        tmp[6] = ze;
-        tmp[7] = ze;
-        std::string msg = "Hex: |01 00 00 00|17 00 00 00|\"{\n \"name\": \"Boris\"\n}\"";
+    char buffer[256];
+    char msg[] = "{\n\"name\": \"Misha\"\n}";
+    long cmd = 1;
+    long size = strlen(msg);
 
-        tcp.Send(msg);
-        std::string rec = tcp.receive();
-        std::cout << rec << std::endl;
-        sleep(5);
-    }
+    memcpy(buffer, (void*)&cmd, 4);
+    memcpy(buffer+4, (void*)&size, 4);
+    memcpy(buffer+8, msg, strlen(msg));
+
+    tcp.Send(buffer,9+size);
+    //        print(buffer,size+9);
+    auto ans = tcp.receive(size);
+    print(ans.c_str(),size);
+    std::cout << ans;
+    sleep(5);
+   // tcp.closeCon();
+    //        sleep(10);
+
 
 }
 
