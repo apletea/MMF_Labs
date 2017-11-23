@@ -70,20 +70,20 @@ public:
     }
     bool Send(char * data, int size)
     {
-        if( send(sock , data , size , 0) < 0)
+        while( send(sock , data , size , 0) < 0)
         {
             cout << "Send failed : " << data << endl;
-            return false;
+//            return false;
         }
         return true;
     }
     string receive(long & size)
     {
         string reply;
-        char buffer[4028];
+        char buffer[15000];
         recv(sock,buffer,8,0);
         memcpy((void*)&size,buffer+4,4);
-        if(recv(sock , buffer , size, 0) < 0)// sizeof(buffer)
+        while(recv(sock , buffer , size, 0) < 0)// sizeof(buffer)
         {
             cout << "receive failed!" << endl;
         }
@@ -125,28 +125,97 @@ void print(const char * data, int size)
         std::cout << data[i];
     }
 }
+
+void login(std::string name, TCPClient tcp)
+{
+    char buffer[256];
+    std::string msg = "{\n\"name\": \""+name+"\"\n}";
+//    std::cout << msg << std::endl;
+    long cmd = 1;
+    long size = msg.size();
+
+    memcpy(buffer, (void*)&cmd, 4);
+    memcpy(buffer+4, (void*)&size, 4);
+    memcpy(buffer+8, msg.c_str(), msg.size());
+    buffer[size+8] = 0;
+    tcp.Send(buffer,8+size);
+    auto ans = tcp.receive(size);
+    std::cout << ans << std::endl;
+}
+
+void getmap(int layer, TCPClient tcp)
+{
+    char buffer[256];
+    std::string msg = "{\"layer\": "+ std::to_string(layer)+" }";
+    std::cout << msg << std::endl;
+    long cmd = 0x0A;
+    long size = msg.size();
+    std::cout << size << std::endl;
+    memcpy(buffer, (void*)&cmd, 4);
+    memcpy(buffer+4, (void*)&size, 4);
+    memcpy(buffer+8, msg.c_str(), msg.size());
+    buffer[size+8] = 0;
+
+    tcp.Send(buffer,8+size);
+    auto ans = tcp.receive(size);
+    std::cout << ans << std::endl;
+}
+
+void move(int train_id,int speed, int line_id,TCPClient tcp)
+{
+    char buffer[256];
+    std::string msg = "{\n \"line_idx\": 1, \n\
+        \n\"speed\": 1, \n\
+        \n\"train_idx\": 0 \n}";
+    std::cout << msg << std::endl;
+    long cmd = 3;
+    long size = msg.size();
+    std::cout << size << std::endl;
+    memcpy(buffer, (void*)&cmd, 4);
+    memcpy(buffer+4, (void*)&size, 4);
+    memcpy(buffer+8, msg.c_str(), msg.size());
+    buffer[size+8] = 0;
+
+    tcp.Send(buffer,8+size);
+    auto ans = tcp.receive(size);
+    std::cout << ans << std::endl;
+}
+
+void turn(TCPClient tcp)
+{
+    char buffer[256];
+    std::string msg="";
+    std::cout << msg << std::endl;
+    long cmd = 5;
+    long size = msg.size();
+    std::cout << size << std::endl;
+    memcpy(buffer, (void*)&cmd, 4);
+    memcpy(buffer+4, (void*)&size, 4);
+    memcpy(buffer+8, msg.c_str(), msg.size());
+    buffer[size+8] = 0;
+
+    tcp.Send(buffer,8+size);
+}
+
 int main(int argc, char ** argv)
 {
     TCPClient tcp;
     tcp.setup(ser_ip,potr);
-
-    char buffer[256];
-    char msg[] = "{\n\"name\": \"Misha\"\n}";
-    long cmd = 1;
-    long size = strlen(msg);
-
-    memcpy(buffer, (void*)&cmd, 4);
-    memcpy(buffer+4, (void*)&size, 4);
-    memcpy(buffer+8, msg, strlen(msg));
-
-    tcp.Send(buffer,9+size);
-    //        print(buffer,size+9);
-    auto ans = tcp.receive(size);
-    print(ans.c_str(),size);
-    std::cout << ans;
-    sleep(5);
-   // tcp.closeCon();
+    login("rrr",tcp);
+//    sleep(5);
+//    tcp.closeCon();
     //        sleep(10);
+    getmap(0,tcp);
+    getmap(1,tcp);
+    move(1,1,1,tcp);
+
+    getmap(1,tcp);
+    getmap(1,tcp);
+    getmap(1,tcp);
+    turn(tcp);
+    turn(tcp);
+    getmap(1,tcp);
+    getmap(1,tcp);
 
 
 }
