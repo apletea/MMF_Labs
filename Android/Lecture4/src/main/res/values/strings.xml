@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name" translatable="false">Лекция2</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Привет фрагмент</string>
+    <string name="EN" translatable="false">EN</string>
+</resources>
