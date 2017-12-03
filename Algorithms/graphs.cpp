@@ -219,10 +219,33 @@ public:
     }
     
 
-    static std::vector<std::pair<int,int>> prim_alg(std::map<std::pair<graph*, graph*>,int> & weihgts)
+    static std::vector<std::pair<int,int>> prim_alg(std::map<std::pair<graph*, graph*>,int> & weights)
     {
-        //std::
-        return {};
+        std::vector<std::pair<int,int>> ans = kraskal_alg(weights);
+        std::set<graph*> is_visited;
+        std::map<graph*, int> res;
+        std::stack<graph*> st;
+        graph* v = pick_start(weights);
+        res[v] = 0;
+        st.push(v);
+        while(!st.empty())
+        {
+            v = st.top();
+            st.pop();
+            if (is_visited.find(v)!=is_visited.end())
+                continue;
+            for (auto neighbor : v->neignbohrs)
+            {
+                if (res.find(neighbor)==res.end())
+                    res[neighbor] = weights[std::pair<graph*,graph*>{v,neighbor}]+res[v];
+                else
+                    res[neighbor] = std::min(res[neighbor],weights[std::pair<graph*,graph*>{v,neighbor}]+res[v]);
+                st.push(neighbor);
+            }
+            is_visited.insert(v);
+
+        }
+        return ans;
     }
 
 
@@ -405,6 +428,14 @@ private:
                 mp[pair.first] = a;
         }
     }
+
+    static graph* pick_start(std::map<std::pair<graph*, graph*>,int> & weights)
+    {
+        for (auto pair : weights)
+        {
+            return pair.first.first;
+        }
+    }
     
     
 };
@@ -453,12 +484,17 @@ int main(int argc, char ** argv)
     //    else
     //        std::cout << "This graph unbounded" << std::endl;
     //kraskal
-        std::map<std::pair<gf_graph::graph*,gf_graph::graph*>,int>  weights;
-        gf_graph::graph * root = gf_graph::graph::create_for_p_k(weights);
-        auto res = gf_graph::graph::kraskal_alg(weights);
-        for (auto tmp : res)
-            std::cout << tmp.first << "  " << tmp.second << std::endl;
-
+    //        std::map<std::pair<gf_graph::graph*,gf_graph::graph*>,int>  weights;
+    //        gf_graph::graph * root = gf_graph::graph::create_for_p_k(weights);
+    //        auto res = gf_graph::graph::kraskal_alg(weights);
+    //        for (auto tmp : res)
+    //            std::cout << tmp.first << "  " << tmp.second << std::endl;
+    //prima
+    std::map<std::pair<gf_graph::graph*,gf_graph::graph*>,int>  weights;
+    gf_graph::graph * root = gf_graph::graph::create_for_p_k(weights);
+    auto res = gf_graph::graph::prim_alg(weights);
+    for (auto tmp : res)
+        std::cout << tmp.first << "  " << tmp.second << std::endl;
 
 
 }
