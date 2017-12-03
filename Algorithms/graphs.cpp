@@ -232,13 +232,22 @@ public:
         std::vector<std::pair<graph*,graph*>> sorted_pairs = sort_pair(weights);
         std::vector<std::pair<int,int>> ans = {};
         std::map<graph*,int> mp;
+        int i = 0;
         for (auto pair : sorted_pairs)
         {
             if (mp.find(pair.first)!=mp.end() && mp[pair.first] == mp[pair.second])
                 continue;
             else
             {
+
                 ans.push_back({pair.first->val,pair.second->val});
+                if (mp.find(pair.first) == mp.end() && mp.find(pair.second) == mp.end())
+                {
+                    mp[pair.first] = i;
+                    mp[pair.second] = i;
+                    i++;
+                    continue;
+                }
                 if (mp.find(pair.first) != mp.end() && mp.find(pair.second) != mp.end())
                     union_set(mp,mp[pair.first],mp[pair.second]);
                 else if (mp.find(pair.first) == mp.end())
@@ -263,24 +272,6 @@ public:
         std::vector<graph*> ans;
         st.push(this);
         std::set<std::pair<graph*,graph*>> set;
-        //        while(!st.empty())
-        //        {
-        
-        //            graph* v = st.top();
-        //            st.pop();
-        //            for (auto neighbor: v->neignbohrs)
-        //            {
-        //                if (set.find(std::pair<graph*,graph*>{neighbor,v})!=set.end())
-        //                    continue;
-        //                set.insert(std::pair<graph*,graph*>{neighbor,v});
-        //                set.insert(std::pair<graph*,graph*>{v,neighbor});
-        //                st.push(neighbor);
-        //            }
-        //            if (st.size())
-        //                ans.push_back(st.top());
-        //            //            ans.push_back(v);
-        //        }
-        //        ans[ans.size()-1] = this;
         find_euler(this,set,ans);
         return ans;
         
@@ -367,9 +358,42 @@ private:
         res.push_back(node);
     }
 
+    static void sort_arr(std::vector<std::pair<graph*, graph*>>&ans,std::map<std::pair<graph*, graph*>,int> &  wieghts, int l = 0,int r = 15)
+    {
+        int pivot  = wieghts[ans[(l+r)/2]];
+        int i = l;
+        int j = r;
+        while (i <= j)
+        {
+            while(wieghts[ans[i]] < pivot) i++;
+            while(wieghts[ans[j]] > pivot) j--;
+            if (i <= j)
+            {
+                auto tmp = ans[i];
+                ans[i] = ans[j];
+                ans[j] = tmp;
+                i++;
+                j--;
+            }
+        }
+        if (i < r)
+            sort_arr(ans,wieghts,i,r);
+        if (j > l)
+            sort_arr(ans,wieghts,l,j);
+    }
+
     static std::vector<std::pair<graph*,graph*>>  sort_pair(std::map<std::pair<graph*, graph*>,int> & weights)
     {
         std::vector<std::pair<graph*,graph*>> ans = {};
+        std::set<std::pair<graph*,graph*>> st;
+        for (auto pair : weights)
+        {
+            if (st.find({pair.first.first,pair.first.second})!=st.end() || st.find({pair.first.second,pair.first.first})!=st.end())
+                continue;
+            ans.push_back(pair.first);
+            st.insert(pair.first);
+        }
+        sort_arr(ans,weights,0,ans.size()-1);
         return ans;
     }
 
@@ -378,7 +402,7 @@ private:
         for (auto pair: mp)
         {
             if (mp[pair.first] == b)
-                mp[pair.first] == a;
+                mp[pair.first] = a;
         }
     }
     
@@ -429,11 +453,13 @@ int main(int argc, char ** argv)
     //    else
     //        std::cout << "This graph unbounded" << std::endl;
     //kraskal
-    std::map<std::pair<gf_graph::graph*,gf_graph::graph*>,int>  weights;
-    gf_graph::graph * root = gf_graph::graph::create_for_p_k(weights);
-    auto res = gf_graph::graph::kraskal_alg(weights);
-    for (auto tmp : res)
-        std::cout << tmp.first << "  " << tmp.second << std::endl;
+        std::map<std::pair<gf_graph::graph*,gf_graph::graph*>,int>  weights;
+        gf_graph::graph * root = gf_graph::graph::create_for_p_k(weights);
+        auto res = gf_graph::graph::kraskal_alg(weights);
+        for (auto tmp : res)
+            std::cout << tmp.first << "  " << tmp.second << std::endl;
+
+
 
 }
 
