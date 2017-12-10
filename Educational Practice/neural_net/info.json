@@ -1,0 +1,26 @@
+{
+    "caffe flavor": "BVLC",
+    "caffe version": "1.0.0-rc3",
+    "creation time": "2017-09-14 08:02:23.170821",
+    "dataset_id": "20170914-080047-6b61",
+    "deploy file": "deploy.prototxt",
+    "digits version": "5.1-dev",
+    "framework": "caffe",
+    "id": "20170914-080223-e793",
+    "image dimensions": [
+        224,
+        224,
+        3
+    ],
+    "image resize mode": "squash",
+    "job id": "20170914-080223-e793",
+    "labels file": "labels.txt",
+    "mean file": "mean.binaryproto",
+    "model file": "original.prototxt",
+    "name": "posters",
+    "snapshot file": "snapshot_iter_18200.caffemodel",
+    "solver file": "solver.prototxt",
+    "status": "Done",
+    "train_val file": "train_val.prototxt",
+    "username": "apletea"
+}
