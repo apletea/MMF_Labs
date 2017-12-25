@@ -9,7 +9,7 @@ struct process
 
 private:
     static bool exist;
-    static int * count;
+    static int * counts;
 
 public:
 
