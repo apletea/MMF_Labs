@@ -18,6 +18,7 @@
 * [Исследование операций (Decision Science)](https://github.com/apletea/MMF_Labs/tree/master/Decision%20Science)- [`С++`](https://github.com/apletea/MMF_Labs/search?l=C%2B%2B)
 * [Веб разработка 3 семестр(Web development 3 semestr)](https://github.com/apletea/MMF_Labs/tree/master/WEB%203%20course)- [`JavaScript`](https://github.com/apletea/MMF_Labs/search?l=javascript),[`HTML`](https://github.com/apletea/MMF_Labs/search?l=html),[`CSS`](https://github.com/apletea/MMF_Labs/search?l=css),[`Bash`](https://github.com/apletea/MMF_Labs/search?l=Bash),[`PowerShell`](https://github.com/apletea/MMF_Labs/search?l=powershell)
 * [Веб разработка 4 семестр(Web development 4 semestr)](https://github.com/apletea/MMF_Labs/tree/master/WEB%204%20course)- [`JavaScript`](https://github.com/apletea/MMF_Labs/search?l=javascript),[`HTML`](https://github.com/apletea/MMF_Labs/search?l=html),[`CSS`](https://github.com/apletea/MMF_Labs/search?l=css),[`php`](https://github.com/apletea/MMF_Labs/search?l=php)
+* [Язык Python (Python Language)](https://github.com/apletea/MMF_Labs/tree/master/Python)- [`Python`](https://github.com/apletea/MMF_Labs/search?l=python)
 * [Учебная практика (Educational Practice)](https://github.com/apletea/MMF_Labs/tree/master/Educational%20Practice)- [`Python`](https://github.com/apletea/MMF_Labs/search?l=python)
 * [Курсовая Работа (Course Project)](https://github.com/apletea/MMF_Labs/tree/master/Course%20Projects)- [`C++`](https://github.com/apletea/MMF_Labs/search?l=C%2B%2B)
 
