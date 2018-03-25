@@ -137,6 +137,39 @@ int branchAndboundary(vector<int> &path, vector<vector<int>> &gp,long long int i
     return iterations;
 }
 
+vector<int> revesePath(vector<int> path, int i, int j)
+{
+    for (int k = i; k <=j/2 ; k++)
+    {
+        int tmp = path[k];
+        path[k] = path[j-k + i];
+        path[j-k + i] = tmp;
+    }
+        return path;
+}
+
+int LocalSearch2(vector<int> &path, vector<vector<int>> &gp, int weight)
+{
+    int iterations = 0;
+    for (int i = 1; i < gp.size()-2; ++i)
+    {
+        for (int j  = i+1; j < gp.size(); ++j)
+        {
+            iterations++;
+            vector<int> reverpath = revesePath(path, i, j);
+            int pathWEigh = getPathWeight(reverpath,gp);
+            if (pathWEigh < weight)
+            {
+                weight = pathWEigh;
+                path = reverpath;
+                i = 1;
+                j = 2;
+            }
+        }
+    }
+    return iterations;
+}
+
 int main(int argc, char *argv[])
 {
 
