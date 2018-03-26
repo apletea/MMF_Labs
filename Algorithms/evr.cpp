@@ -27,10 +27,12 @@ void init_gp(vector<vector<int>> & gp)
 int getPathWeight(const vector<int> &path, const vector<vector<int>> &gp)
 {
     int res = 0;
-    int cur = 0;
-    for (int i = 0; i < path.size(); ++i)
+    int cur = path[0];
+    //    std::cout << path.size() << std::endl;
+    for (int i = 1; i < path.size(); ++i)
     {
         res+=gp[cur][path[i]];
+        //        std::cout << cur << std::endl;
         cur = path[i];
     }
     return res;
@@ -48,7 +50,7 @@ bool in(const vector<int> &path, const int & i)
 
 vector<int> true_path;
 int true_weight = INT_MAX;
-int findPathBruteForce(vector<int> &path, vector<vector<int>> &gp,long long int iterations = 0, int weight = 0)
+int findPathBruteForce(vector<int> path, vector<vector<int>> &gp,long long int iterations = 0, int weight = 0)
 {
     if (!iterations)
         path.push_back(0);
@@ -66,18 +68,9 @@ int findPathBruteForce(vector<int> &path, vector<vector<int>> &gp,long long int 
         if (in(path,i))
             continue;
         iterations++;
-//        if (weight+gp[i][path[path.size()-2]] < 0)
-//        {
-//            cout << gp[i][path[path.size()-2]] <<endl;
-//            cout << i << endl;
-//            cout << path[path.size()-2] << endl;
-//            cout << weight << endl;
-//            throw;
-//        }
         path.push_back(i);
         iterations = findPathBruteForce(path,gp,iterations,weight+gp[i][path[path.size()-2]]);
         path.pop_back();
-path
     }
     if (path.size() == 1)
         path = true_path;
@@ -128,9 +121,8 @@ int branchAndboundary(vector<int> &path, vector<vector<int>> &gp,long long int i
             continue;
         iterations++;
         path.push_back(i);
-        iterations = findPathBruteForce(path,gp,iterations,weight+gp[i][path[path.size()-1]]);
+        iterations = branchAndboundary(path,gp,iterations,weight+gp[i][path[path.size()-2]]);
         path.pop_back();
-
     }
     if (path.size() == 1)
         path = true_path;
@@ -145,7 +137,7 @@ vector<int> revesePath(vector<int> path, int i, int j)
         path[k] = path[j-k + i];
         path[j-k + i] = tmp;
     }
-        return path;
+    return path;
 }
 
 int LocalSearch2(vector<int> &path, vector<vector<int>> &gp, int weight)
@@ -182,7 +174,7 @@ int main(int argc, char *argv[])
 
 
     iter = findPathBruteForce(path, gp);
-    path_weight = getPathWeight(path, gp);
+    path_weight = getPathWeight(true_path, gp);
     write_to_file = "echo BryteForce weight = " + to_string(path_weight) + " iterations = " + to_string(iter) + " >> out.txt";
     system(write_to_file.data());
     path.erase(path.begin(), path.end());
@@ -201,11 +193,13 @@ int main(int argc, char *argv[])
     system(write_to_file.data());
     path.erase(path.begin(), path.end());
 
-//    iter = findPathBruteForce(path, gp);
-//    path_weight = getPathWeight(path, gp);
-//    write_to_file = "echo Local Search 2 algh weight = " + to_string(path_weight) + " iterations = " + to_string(iter) + " >> out.txt";
-//    system(write_to_file.data());
-//    path.erase(path.begin(), path.end());
+    greedy(path, gp);
+    int weight = getPathWeight(path, gp);
+    iter = LocalSearch2(path, gp, weight);
+    path_weight = getPathWeight(path, gp);
+    write_to_file = "echo Local Search 2 algh weight = " + to_string(path_weight) + " iterations = " + to_string(iter) + " >> out.txt";
+    system(write_to_file.data());
+    path.erase(path.begin(), path.end());
 
 //    iter = findPathBruteForce(path, gp);
 //    path_weight = getPathWeight(path, gp);
