@@ -14,8 +14,11 @@ void LoadImages(const string &strFile, vector<string> &vstrImageFilenames,
 
 int main(int argc, char ** argv)
 {
-	vector<string> vstrImageFilenames;
-    cv::VideoCapture vc(0);
+	
+    vector<string> vstrImageFilenames;
+    cv::VideoCapture vc(argv[1]);
+    std::ifstream in_data(argv[2]);
+    std::string str;
     LoadImages(strFile, vstrImageFilenames, vTimestamps);
 
 
@@ -29,10 +32,10 @@ int main(int argc, char ** argv)
 
     for(int ni=0; ni<1000000; ni++)
     {
-        // Read image from file
         vc >> im;
-        double tframe;
-
+        in_data >> str;
+	double tframe;
+	
 
 #ifdef COMPILEDWITHC11
         std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
