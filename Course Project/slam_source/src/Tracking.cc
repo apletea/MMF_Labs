@@ -264,6 +264,32 @@ cv::Mat Tracking::GrabImageMonocular(const cv::Mat &im, const double &timestamp)
     return mCurrentFrame.mTcw.clone();
 }
 
+cv::Mat GrabImageSensors(const cv::Mat &im,const std::vector<int> sensor ,const double &timestamp)
+{
+    mImGray = im;
+
+    if(mImGray.channels()==3)
+    {
+        if(mbRGB)
+            cvtColor(mImGray,mImGray,CV_RGB2GRAY);
+        else
+            cvtColor(mImGray,mImGray,CV_BGR2GRAY);
+    }
+    else if(mImGray.channels()==4)
+    {
+        if(mbRGB)
+            cvtColor(mImGray,mImGray,CV_RGBA2GRAY);
+        else
+            cvtColor(mImGray,mImGray,CV_BGRA2GRAY);
+    }
+
+
+    Track();
+    return mCurrentFrame.mTcw.clone();
+
+}
+
+
 void Tracking::Track()
 {
     if(mState==NO_IMAGES_YET)
