@@ -22,9 +22,9 @@ int main(int argc, char ** argv)
 //    LoadImages(strFile, vstrImageFilenames, vTimestamps);
     int nImages = 1;
     cv::Mat im;
+    std::vector<int> sensors;
 
-
-    ORB_SLAM2::System SLAM(argv[3],argv[2],ORB_SLAM2::System::MONOCULAR,true);
+    ORB_SLAM2::System SLAM(argv[3],argv[2],ORB_SLAM2::System::SENSORS,true);
     SLAM.mbActivateLocalizationMode = true;
     vector<float> vTimesTrack;
 
@@ -38,7 +38,7 @@ int main(int argc, char ** argv)
         std::cout << "get frame" << std::endl;
         in_data >> str;
 	    double tframe;
-	
+	    sensors = convert2Vec(str);
 
 #ifdef COMPILEDWITHC11
         std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
@@ -47,7 +47,7 @@ int main(int argc, char ** argv)
 #endif
 
         // Pass the image to the SLAM system
-        SLAM.TrackMonocular(im,tframe);
+        SLAM.TrackSensor(im,sensors,tframe);
         std::cout << "TrackMonocular" << std::endl;
 
 
