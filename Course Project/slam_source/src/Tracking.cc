@@ -282,7 +282,10 @@ cv::Mat GrabImageSensors(const cv::Mat &im,const std::vector<int> sensor ,const 
         else
             cvtColor(mImGray,mImGray,CV_BGRA2GRAY);
     }
-
+    if(mState==NOT_INITIALIZED || mState==NO_IMAGES_YET)
+        mCurrentFrame = Frame(mImGray,sensor,timestamp,mpIniORBextractor,mpORBVocabulary,mK,mDistCoef,mbf,mThDepth);
+    else
+        mCurrentFrame = Frame(mImGray,sensor,timestamp,mpORBextractorLeft,mpORBVocabulary,mK,mDistCoef,mbf,mThDepth);
 
     Track();
     return mCurrentFrame.mTcw.clone();
@@ -308,7 +311,7 @@ void Tracking::Track()
             StereoInitialization();
         else
             MonocularInitialization();
-
+        
         mpFrameDrawer->Update(this);
 
         if(mState!=OK)

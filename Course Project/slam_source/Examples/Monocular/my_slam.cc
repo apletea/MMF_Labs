@@ -25,7 +25,7 @@ int main(int argc, char ** argv)
 
 
     ORB_SLAM2::System SLAM(argv[3],argv[2],ORB_SLAM2::System::MONOCULAR,true);
-
+    SLAM.mbActivateLocalizationMode = true;
     vector<float> vTimesTrack;
 
 	cout << endl << "-------" << endl;
