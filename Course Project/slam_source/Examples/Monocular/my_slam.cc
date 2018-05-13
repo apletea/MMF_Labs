@@ -6,12 +6,12 @@
 #include<opencv2/core/core.hpp>
 
 #include<System.h>
-
+#include<vector>
 using namespace std;
 
 void LoadImages(const string &strFile, vector<string> &vstrImageFilenames,
                 vector<double> &vTimestamps);
-
+std::vector<int> convert2Vec(std::string str);
 int main(int argc, char ** argv)
 {
 	
@@ -81,4 +81,13 @@ int main(int argc, char ** argv)
 
     return 0;
 
+}
+
+
+std::vector<int> convert2Vec(std::string str)
+{
+    std::vector<int> ans;
+
+
+    return ans;
 }

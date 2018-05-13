@@ -3,18 +3,24 @@
 #--------------------------------------------------------------------------------------------
 # Camera Parameters. Adjust them!
 #--------------------------------------------------------------------------------------------
-
+#camera_matrix:
+#- [987.6085785238914, 0.0, 644.5217589718012]
+#- [0.0, 1015.1916221709457, 144.35696651156687]
+#- [0.0, 0.0, 1.0]
+#dist_coeff:
+#- [0.13470853024063012, -0.45790960557171617, -0.02394999688653797, 0.03056277567100783,
+#  0.9671070283296965]
 # Camera calibration and distortion parameters (OpenCV) 
-Camera.fx: 517.306408
-Camera.fy: 516.469215
-Camera.cx: 318.643040
-Camera.cy: 255.313989
+Camera.fx: 987.6085785238914
+Camera.fy: 1015.1916221709457
+Camera.cx: 644.5217589718012
+Camera.cy: 144.35696651156687
 
-Camera.k1: 0.262383
-Camera.k2: -0.953104
-Camera.p1: -0.005358
-Camera.p2: 0.002628
-Camera.k3: 1.163314
+Camera.k1: 0.13470853024063012
+Camera.k2: -0.45790960557171617
+Camera.p1: -0.02394999688653797
+Camera.p2: 0.03056277567100783
+Camera.k3: 0.9671070283296965
 
 # Camera frames per second 
 Camera.fps: 25.0
@@ -27,20 +33,20 @@ Camera.RGB: 1
 #--------------------------------------------------------------------------------------------
 
 # ORB Extractor: Number of features per image
-ORBextractor.nFeatures: 1000
+ORBextractor.nFeatures: 3000
 
-# ORB Extractor: Scale factor between levels in the scale pyramid 	
+# ORB Extractor: Scale factor between levels in the scale pyramid   
 ORBextractor.scaleFactor: 1.2
 
-# ORB Extractor: Number of levels in the scale pyramid	
-ORBextractor.nLevels: 8
+# ORB Extractor: Number of levels in the scale pyramid  
+ORBextractor.nLevels: 10
 
 # ORB Extractor: Fast threshold
 # Image is divided in a grid. At each cell FAST are extracted imposing a minimum response.
 # Firstly we impose iniThFAST. If no corners are detected we impose a lower value minThFAST
-# You can lower these values if your images have low contrast			
-ORBextractor.iniThFAST: 20
-ORBextractor.minThFAST: 7
+# You can lower these values if your images have low contrast     
+ORBextractor.iniThFAST: 40
+ORBextractor.minThFAST: 1
 
 #--------------------------------------------------------------------------------------------
 # Viewer Parameters
