@@ -267,7 +267,7 @@ cv::Mat System::TrackMonocular(const cv::Mat &im, const double &timestamp)
     return Tcw;
 }
 
-cv::Mat TrackSensor(const cv::Mat &im,const std::vector<int> sensors, const double &timestamp)
+cv::Mat System::TrackSensor(const cv::Mat &im,const std::vector<int> sensors, const double &timestamp)
 {
     {
         unique_lock<mutex> lock(mMutexMode);
