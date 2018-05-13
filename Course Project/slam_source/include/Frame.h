@@ -33,7 +33,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <opencv2/opencv.hpp>
-
+#include <vector>
 namespace ORB_SLAM2
 {
 #define FRAME_GRID_ROWS 48
@@ -59,6 +59,8 @@ public:
     // Constructor for Monocular cameras.
     Frame(const cv::Mat &imGray, const double &timeStamp, ORBextractor* extractor,ORBVocabulary* voc, cv::Mat &K, cv::Mat &distCoef, const float &bf, const float &thDepth);
 
+    //Constructor for Monocular camera with Sensors
+    Frame(const cv::Mat &imGray,const std::vector<int> sensors, const double &timeStamp, ORBextractor* extractor,ORBVocabulary* voc, cv::Mat &K, cv::Mat &distCoef, const float &bf, const float &thDepth)
     // Extract ORB on the image. 0 for left image and 1 for right image.
     void ExtractORB(int flag, const cv::Mat &im);
 
