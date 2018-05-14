@@ -17,7 +17,7 @@ int main(int argc, char ** argv)
 	
     vector<string> vstrImageFilenames;
     cv::VideoCapture vc(argv[1]);
-    std::ifstream in_data(argv[2]);
+    std::ifstream in_data(argv[4]);
     std::string str;
 //    LoadImages(strFile, vstrImageFilenames, vTimestamps);
     int nImages = 1;
@@ -36,9 +36,8 @@ int main(int argc, char ** argv)
         vc >> im;
         cv::rotate(im, im, cv::ROTATE_90_CLOCKWISE);
         std::cout << "get frame" << std::endl;
-        in_data >> str;
 	    double tframe;
-	    sensors = convert2Vec(str);
+	    sensors = convert2Vec(in_data);
 
 #ifdef COMPILEDWITHC11
         std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
@@ -84,10 +83,15 @@ int main(int argc, char ** argv)
 }
 
 
-std::vector<int> convert2Vec(std::string str)
+std::vector<int> convert2Vec(std::ifstream stream)
 {
     std::vector<int> ans;
-
+    int tmp;
+    for (int i = 0; i < 6; ++i)
+    {
+        stream >> tmp;
+        ans.push_back(tmp);
+    }
 
     return ans;
 }
