@@ -92,6 +92,5 @@ std::vector<int> convert2Vec(std::ifstream stream)
         stream >> tmp;
         ans.push_back(tmp);
     }
-
     return ans;
 }
