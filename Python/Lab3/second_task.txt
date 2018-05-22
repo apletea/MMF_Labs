@@ -1,0 +1,17 @@
+5
+file1 R W
+file2 X
+file3 W X
+file4 R W X
+file5 W X
+10
+file1 W
+file2 X
+file3 X
+file4 X
+file5 R
+file1 X
+file2 R
+file3 R
+file4 W
+file5 X
