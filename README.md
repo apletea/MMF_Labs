@@ -20,7 +20,7 @@
 * [Веб разработка 4 семестр(Web development 4 semestr)](https://github.com/apletea/MMF_Labs/tree/master/WEB%204%20course)- [`JavaScript`](https://github.com/apletea/MMF_Labs/search?l=javascript),[`HTML`](https://github.com/apletea/MMF_Labs/search?l=html),[`CSS`](https://github.com/apletea/MMF_Labs/search?l=css),[`php`](https://github.com/apletea/MMF_Labs/search?l=php)
 * [Язык Python (Python Language)](https://github.com/apletea/MMF_Labs/tree/master/Python)- [`Python`](https://github.com/apletea/MMF_Labs/search?l=python)
 * [Учебная практика (Educational Practice)](https://github.com/apletea/MMF_Labs/tree/master/Educational%20Practice)- [`Python`](https://github.com/apletea/MMF_Labs/search?l=python)
-* [Курсовая Работа (Course Project)](https://github.com/apletea/MMF_Labs/tree/master/Course%20Projects)- [`C++`](https://github.com/apletea/MMF_Labs/search?l=C%2B%2B)
+* [Курсовая Работа (Course Project)](https://github.com/apletea/MMF_Labs/tree/master/Course%20Project)- [`C++`](https://github.com/apletea/MMF_Labs/search?l=C%2B%2B)
 
 ---
 
