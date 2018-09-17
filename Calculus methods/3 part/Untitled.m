@@ -36,8 +36,6 @@ for i=2:n
     y(i) = f(i) - sum;
 end
 
-
-x=[];
 x(n) = y(n) / U(n,n);
 for i=(n-1):-1:1
     sum = 0;
