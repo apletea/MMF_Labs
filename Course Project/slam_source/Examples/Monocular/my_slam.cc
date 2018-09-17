@@ -14,10 +14,10 @@ void LoadImages(const string &strFile, vector<string> &vstrImageFilenames,
 std::vector<int> convert2Vec(std::string str);
 int main(int argc, char ** argv)
 {
-	
+    
     vector<string> vstrImageFilenames;
     cv::VideoCapture vc(argv[1]);
-    std::ifstream in_data(argv[4]);
+    std::ifstream in_data(argv[2]);
     std::string str;
 //    LoadImages(strFile, vstrImageFilenames, vTimestamps);
     int nImages = 1;
@@ -28,7 +28,7 @@ int main(int argc, char ** argv)
     SLAM.mbActivateLocalizationMode = true;
     vector<float> vTimesTrack;
 
-	cout << endl << "-------" << endl;
+    cout << endl << "-------" << endl;
     cout << "Start processing sequence ..." << endl;
 
     for(int ni=0; ni<1000000; ni++)
@@ -36,8 +36,9 @@ int main(int argc, char ** argv)
         vc >> im;
         cv::rotate(im, im, cv::ROTATE_90_CLOCKWISE);
         std::cout << "get frame" << std::endl;
-	    double tframe;
-	    sensors = convert2Vec(in_data);
+        in_data >> str;
+        double tframe;
+        sensors = convert2Vec(str);
 
 #ifdef COMPILEDWITHC11
         std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
@@ -46,10 +47,10 @@ int main(int argc, char ** argv)
 #endif
 
         // Pass the image to the SLAM system
-        SLAM.TrackSensor(im,sensors,tframe);
-        std::cout << "TrackMonocular" << std::endl;
-
-
+        cv::Mat ans = SLAM.TrackSensor(im,sensors,tframe);
+        std::cout << "TrackMonocular 1" << std::endl;
+        cv::imwrite("/home/apletea/work/data/1.jpg",ans);
+        cv::waitKey(5);
 #ifdef COMPILEDWITHC11
         std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
 #else
@@ -83,14 +84,10 @@ int main(int argc, char ** argv)
 }
 
 
-std::vector<int> convert2Vec(std::ifstream stream)
+std::vector<int> convert2Vec(std::string str)
 {
     std::vector<int> ans;
-    int tmp;
-    for (int i = 0; i < 6; ++i)
-    {
-        stream >> tmp;
-        ans.push_back(tmp);
-    }
+
+
     return ans;
 }

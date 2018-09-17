@@ -87,13 +87,14 @@ void Viewer::Run()
     pangolin::OpenGlMatrix Twc;
     Twc.SetIdentity();
 
-    cv::namedWindow("ORB-SLAM2: Current Frame");
+    cv::namedWindow("ORB-SLAM2: Current Frame",0);
 
     bool bFollow = true;
     bool bLocalizationMode = false;
 
     while(1)
     {
+        int i = 0;
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         mpMapDrawer->GetCurrentOpenGLCameraMatrix(Twc);
@@ -135,9 +136,11 @@ void Viewer::Run()
         pangolin::FinishFrame();
 
         cv::Mat im = mpFrameDrawer->DrawFrame();
+        std::cout << "/home/apletea/work/data/img" + std::to_string(i) + ".jpg" 
+        cv::imwrite("/home/apletea/work/data/img" + std::to_string(i) + ".jpg",im);
         cv::imshow("ORB-SLAM2: Current Frame",im);
         cv::waitKey(mT);
-
+        i++;
         if(menuReset)
         {
             menuShowGraph = true;
