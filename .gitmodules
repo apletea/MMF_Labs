@@ -1,0 +1,3 @@
+[submodule "Web-services/Spline-Ltd."]
+	path = Web-services/Spline-Ltd.
+	url = https://github.com/apletea/Spline-Ltd.
